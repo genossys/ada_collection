@@ -40,10 +40,25 @@ Route::group(['middleware' => 'auth'], function () {
         return view('/admin/master/datauser');
     })->name('user');
 
+    Route::get('/customer', function () {
+        return view('/admin/master/datacustomer');
+    })->name('customer');
+
+    Route::get('/sales', function () {
+        return view('/admin/master/datasales');
+    })->name('sales');
+
     Route::get('/kategori', function () {
         return view('/admin/master/datakategori');
     })->name('kategori');
 
+    Route::get('/penjualan', function () {
+        return view('/admin/transaksi/datapenjualan');
+    })->name('penjualan');
+
+    Route::get('/tambahpenjualan', function () {
+        return view('/admin/transaksi/tambahpenjualan');
+    })->name('tambahpenjualan');
 
 
 

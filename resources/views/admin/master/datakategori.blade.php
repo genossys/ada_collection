@@ -10,7 +10,7 @@ Data Kategori
 <!-- Button to Open the Modal -->
 <div>
     <button id="tambahModal" style="margin-bottom: 10px; margin-top: 20px" type="button" class="btn btn-primary box-tools pull-right" data-toggle="modal" data-target="#modaltambahKategori">
-        Tambah Data Kategori
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> Data Kategori
     </button>
 
 </div>

@@ -116,6 +116,20 @@
                                         <p>Data User</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item ">
+                                    <a href="{{route ('customer')}}" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Customer</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a href="{{route ('sales')}}" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Sales</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -129,9 +143,9 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link ">
+                                    <a href="{{route ('penjualan')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Order</p>
+                                        <p>Penjualan</p>
                                     </a>
                                 </li>
 
