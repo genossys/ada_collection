@@ -8,11 +8,14 @@ Data User
 
 
 <!-- Button to Open the Modal -->
+<br>
 <div>
-    <button id="tambahModal" style="margin-bottom: 10px; margin-top: 20px" type="button" class="btn btn-primary box-tools pull-right" data-toggle="modal" data-target="#modaltambahUser">
+    <button id="tambahModal" style="margin-bottom: 10px; margin-top: 20px" type="button" class="btn btn-primary box-tools pull-right" onclick="showTambahUser()">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Data User
     </button>
-
+    <br>
+    <br>
+    <hr>
 </div>
 
 <div class="table-responsive-lg">
@@ -20,8 +23,9 @@ Data User
         <thead>
             <tr>
                 <th>#</th>
+                <th>Username</th>
                 <th>Email</th>
-                <th>Nama</th>
+                <th>Hak Akses</th>
                 <th>No. Telp</th>
                 <th>Action</th>
             </tr>
@@ -38,37 +42,43 @@ Data User
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <form action="" method="POST" id="formSimpanUser" class="form">
+            <form action="" method="POST" id="formSimpanUser" class="formuser">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="alert alert-danger" style="display:none"></div>
                     <div class="alert alert-success" style="display:none"></div>
 
-                    <div class="form-group">
-                        <label>Nama </label>
-                        <input type="text" class="form-control" placeholder="Nama" id="txtNama" name="txtNama">
-                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">{{ __('Username') }}</label>
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Email </label>
-                        <input type="email" class="form-control" placeholder="Email" id="txtEmail" name="txtEmail">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email">{{ __('E-Mail Address') }}</label>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            </div>
+                        </div>
                     </div>
 
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Hak Akses</label>
-                                <select class="form-control" id="cBoxHakAkses">
+                                <label >Hak Akses</label>
+                                <select class="form-control" id="cBoxHakAkses" name="hakAkses">
                                     <option value="admin">Admin</option>
-                                    <option value="user">User</option>
+                                    <option value="pimpinan">Pimpinan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>No.Telp </label>
-                                <input type="text" class="form-control" placeholder="No. Telp" id="txtNoTelp" name="txtNoTelp">
+                                <label for="nohp">{{ __('No. Hp') }}</label>
+                                <input id="nohp" type="text" class="form-control" name="nohp" value="{{ old('nohp') }}" required autocomplete="nohp">
                             </div>
                         </div>
                     </div>
@@ -78,23 +88,23 @@ Data User
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" id="txtPasswordUser" name="txtPasswordUser">
+                                <label for="password">{{ __('Password') }}</label>
+                                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
                             </div>
                         </div>
 
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Konfirmasi Password</label>
-                                <input type="password" class="form-control" placeholder="Masukan Ulang Password" id="txtConPasswordUser" name="txtConPasswordUser">
+                                <label for="password-confirm">{{ __('Konfirmasi Password') }}</label>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
                     </div>
 
 
                     <div class="text-right">
-                        <button id="btnSimpan" class="btn btn-primary"></button>
+                        <button id="btnSimpan" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Simpan</button>
                     </div>
                 </div>
 
@@ -103,15 +113,128 @@ Data User
     </div>
 </div>
 <!-- EndModal -->
+<div class="modal fade" id="modalEditUser">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Edit Data User</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form action="" method="POST" id="formEditUser" class="formuser">
+                <div class="modal-body">
+                    <div class="alert alert-danger" style="display:none">coba</div>
+                    <div class="alert alert-success" style="display:none"></div>
+                    <input type="hidden" name="oldusername" id="oldusername">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="usernameedit">{{ __('Username') }}</label>
+                                <input id="usernameedit" type="text" class="form-control" name="usernameedit" value="{{ old('usernameedit') }}" required autocomplete="usernameedit" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="emailedit">{{ __('E-Mail Address') }}</label>
+                                <input id="emailedit" type="email" class="form-control" name="emailedit" value="{{ old('emailedit') }}" required autocomplete="emailedit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label >Hak Akses</label>
+                                <select class="form-control" id="cBoxHakAksesedit" name="hakAksesedit">
+                                    <option value="admin">Admin</option>
+                                    <option value="pimpinan">Pimpinan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="nohpedit">{{ __('No. Hp') }}</label>
+                                <input id="nohpedit" type="text" class="form-control" value="{{ old('nohpedit') }}" name="nohpedit" required autocomplete="nohpedit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button id="btnEdit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditPassword">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Reset Password</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form action="" method="POST" id="formEditPsw" class="formuser">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="alert alert-danger" style="display:none">coba</div>
+                    <div class="alert alert-success" style="display:none"></div>
+                    <input type="hidden" name="oldusernamepsw" id="oldusernamepsw">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="passwordedit">{{ __('Password') }}</label>
+                                <input id="passwordedit" type="password" class="form-control" name="passwordedit" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="passwordedit-confirm">{{ __('Confirm Password') }}</label>
+                                <input id="passwordedit-confirm" type="password" class="form-control" name="passwordedit_confirmation" required autocomplete="new-password">
+                                <small id="passwordHelpEdit" class="text-danger" hidden>
+                                    Password Tidak Cocok
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button id="btnEditPsw" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 
 @section('script')
+<script src="{{ asset('/js/tampilan/fileinput.js') }}"></script>
 <script src="{{ asset('/js/tampilan/changemodal.js') }}"></script>
-
-
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTablesBootstrap4.js') }}"></script>
+<script src="{{ asset('/js/Master/user.js') }}"></script>
+<script type="text/javascript">
+$("#passwordedit-confirm").on("blur", function () {
+    var psw = document.getElementById("passwordedit").value;
+    var pswcnf = document.getElementById("passwordedit-confirm").value;
+    if ((psw == pswcnf)) {
+        $("#passwordHelpEdit").attr("hidden", true);
+    } else {
+        $("#passwordHelpEdit").attr("hidden", false);
+    }
+});</script>
 @endsection

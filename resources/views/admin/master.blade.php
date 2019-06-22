@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('/adminlte/css/adminlte.min.css')}}">
     <!-- Genosstyle -->
     <link rel="stylesheet" href="{{ asset('/css/genosstyle.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css')}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href=" {{ asset('/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
@@ -51,7 +52,7 @@
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user"></i>
+                        {{auth()->user()->username}} &nbsp;<i class="fa fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                         <a href="{{route('logout')}}" class="dropdown-item dropdown-footer">Logout</a>
@@ -78,7 +79,7 @@
                         <img src="{{asset ('/adminlte/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{auth()->user()->user_id}}</a>
+                        <a href="#" class="d-block">{{auth()->user()->username}}</a>
                     </div>
                 </div>
 
@@ -95,41 +96,49 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route ('kategori')}}" class="nav-link ">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data Kategori</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{route ('produk')}}" class="nav-link ">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data Produk</p>
-                                    </a>
-                                </li>
-
 
                                 <li class="nav-item ">
-                                    <a href="{{route ('user')}}" class="nav-link">
+                                    <a href="{{route ('pageuser')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Data User</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item ">
-                                    <a href="{{route ('customer')}}" class="nav-link">
+                                    <a href="{{route ('pagecustomer')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Data Customer</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item ">
-                                    <a href="{{route ('sales')}}" class="nav-link">
+                                    <a href="{{route ('pagesales')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Data Sales</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('pagesatuan') }}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Satuan</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{route ('pagekategori')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Kategori</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{route ('pageproduct')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Produk</p>
+                                    </a>
+                                </li>
+                                
                             </ul>
                         </li>
 

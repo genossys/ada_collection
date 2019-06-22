@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        return view('umum.login');
+        return view('auth.login');
     }
 
     function logout(Request $r)
